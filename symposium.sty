@@ -1,0 +1,183 @@
+\ProvidesPackage{symposium}[2021/08/06 v1.0]
+
+\usepackage{geometry}	%% 余白調整用
+\usepackage{ifthen}		%% 条件分岐
+\usepackage{fancyhdr}	%% ヘッダのカスタマイズ
+\usepackage{calc}		%% 長さ等の計算が可能になる
+\usepackage[explicit]{titlesec}		%% sectionとかsubsectionの書式
+\usepackage[dvipdfmx]{graphicx,xcolor}	%% 図と色
+\usepackage[bf]{caption}
+%\usepackage[bf,figurename=Fig., tablename=Table, singlelinecheck=false]{caption}
+	%% キャプションをFig.1: で始めるために入れた
+\captionsetup{justification=centering}	%% キャプションを中央揃え
+\usepackage{url}		%% URLを書く用
+\usepackage{amssymb,amsfonts,amsmath}	%% 数式用
+\usepackage{comment}	%% コメント
+\usepackage{listings,jvlisting}	%% コードを貼る用
+\usepackage{indentfirst}		%% 強制的にインデント
+%\usepackage{newtxtext,newtxmath}	%% Times New Roman % これはうまくいかなかった
+
+
+%% レイアウト
+\geometry{left=17truemm,right=17truemm,top=25truemm,bottom=25truemm}	%% 余白の指定
+\setlength{\columnsep}{10truemm}		% 段組の間隔
+
+
+
+\makeatletter
+%% タイトル用コマンドを定義
+\def\@title{\empty}	%% 主題用変数
+\def\title#1{\gdef\@title{#1}}	%% 主題を設定
+
+\def\@subtitle{\empty}	%% 副題用変数
+\def\subtitle#1{\gdef\@subtitle{#1}}	%% 副題を設定
+
+\def\@author{\empty}	%% 著者用変数
+\def\author#1{\gdef\@author{#1}}		%% 著者を設定
+
+\def\@affiliation{\empty}	%% 所属用変数
+\def\affiliation#1{\gdef\@affiliation{#1}}	%% 所属を設定
+
+\def\@abstract{\empty}	%% 概要用変数
+\def\abstract#1{\gdef\@abstract{#1}}	%% 概要を設定
+
+
+%% maketitleの再定義
+\renewcommand{\maketitle}[0]{
+	\twocolumn[%
+		\centering
+		\vskip -5truept
+
+		%% 主題
+		\fontsize{16truept}{0pt}\selectfont
+		\@title
+
+		%% 副題
+		\ifthenelse{\equal{\@subtitle}{\empty}}%
+		{%
+			%% 副題を設定してないなら
+			\vskip 20truept
+		}{%
+			%% 副題を設定したなら配置
+			\vskip 16truept
+
+			\fontsize{14truept}{0pt}\selectfont
+			\@subtitle
+
+			\vskip 20truept
+		}
+
+		%% 著者
+		\fontsize{12truept}{0pt}\selectfont
+		\@author
+
+		\vskip 4truept
+
+		%% 所属
+		\fontsize{12truept}{0pt}\selectfont
+		\@affiliation
+
+
+		\vskip 20truept
+		
+		%% 概要
+		\fontsize{11truept}{0pt}\selectfont
+		\textbf{概要 Abstract}	%% for English, you must change this
+		%
+		\vskip 4truept
+		\begin{minipage}{\textwidth-20truemm}
+		\begin{flushleft}
+		\fontsize{9truept}{0pt}\selectfont
+		\@abstract
+		\end{flushleft}
+		\end{minipage}
+
+		\vskip 35truept
+	]
+}
+\makeatother
+
+\begin{comment}
+%% ヘッダの設定
+\pagestyle{fancy}
+
+%% ヘッダ中央部
+\fancyhead[C]{
+	\textit{The 22nd Annual Symposium of Alife Lab, 2021}
+}
+\fancyhead[L]{}	%% ヘッダ左
+\fancyhead[R]{}	%% ヘッダ右
+\fancyfoot[C]{}	%% フッタ中央
+\end{comment}
+
+
+
+\begin{comment}
+%% セクションの上下間隔
+\makeatletter
+\def\section{\@startsection {section}{1}{\z@}{-2.5ex plus -0ex minus -.2ex}{.2 ex plus -.2ex}{\large\bf}}
+\def\subsection{\@startsection {subsection}{1}{\z@}{-2.5ex plus -0ex minus -.2ex}{.2 ex plus -.2ex}{\large\bf}}
+\makeatother
+\end{comment}
+
+%% セクションの数字の書式設定
+%\renewcommand{\thesection}{\arabic{section}.}
+%\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+
+%% セクションタイトルを大きく
+\titleformat{\section}[hang]%
+	{\large\bfseries}%
+	{}%
+	{0em}
+	{\thesection.~#1}
+	{}
+
+%% サブセクションタイトルを大きく
+\titleformat{\subsection}[hang]%
+	{\large\bfseries}%
+	{}%
+	{0em}
+	{\thesubsection~#1}
+	{}
+
+
+\titlespacing{\section}%
+	{0em}	%% 見出しの左
+	{1.2em}	%% 見出しの上
+	{.2em}	%% 見出しの下
+%	{}		%% 見出しの右
+
+\titlespacing{\subsection}%
+	{0em}	%% 見出しの左
+	{1.2em}	%% 見出しの上
+	{.2em}	%% 見出しの下
+%	{}		%% 見出しの右
+
+
+%% 図関連の余白
+\setlength\floatsep{4pt}			%% 図と図の間の余白
+\setlength\textfloatsep{9pt}		%% 本文と図の間の余白
+\setlength\abovecaptionskip{0pt}	%% 図とキャプションの間の余白
+
+
+%%ソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex, 
+  tabsize=4
+}
