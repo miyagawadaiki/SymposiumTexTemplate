@@ -19,7 +19,16 @@
 
 
 %% レイアウト
-\geometry{left=17truemm,right=17truemm,top=25truemm,bottom=25truemm}	%% 余白の指定
+%\geometry{left=17truemm,right=17truemm,top=25truemm,bottom=25truemm}	%% 余白の指定
+\geometry{left=17truemm,right=17truemm,bottom=22.5truemm}	%% 余白の指定
+
+\setlength{\headheight}{9.5truept}
+\setlength{\topmargin}{0truemm}
+\setlength{\voffset}{19.3truemm-1truein+10truept}
+\setlength{\headsep}{25truemm-19.3truemm-9.5truept}
+
+\setlength{\footskip}{13truemm}
+
 \setlength{\columnsep}{10truemm}		% 段組の間隔
 
 
@@ -46,7 +55,8 @@
 \renewcommand{\maketitle}[0]{
 	\twocolumn[%
 		\centering
-		\vskip -5truept
+		%\vskip -5truept
+		\vskip 9.5truept
 
 		%% 主題
 		\fontsize{16truept}{0pt}\selectfont
@@ -82,7 +92,7 @@
 		
 		%% 概要
 		\fontsize{11truept}{0pt}\selectfont
-		\textbf{概要 Abstract}	%% for English, you must change this
+		\textbf{概要}	%% for English, you must change this
 		%
 		\vskip 4truept
 		\begin{minipage}{\textwidth-20truemm}
@@ -101,7 +111,7 @@
 %% ページ番号消す
 \pagestyle{empty}
 
-\begin{comment}
+%\begin{comment}
 %% ヘッダの設定
 \pagestyle{fancy}
 
@@ -111,8 +121,12 @@
 }
 \fancyhead[L]{}	%% ヘッダ左
 \fancyhead[R]{}	%% ヘッダ右
-\fancyfoot[C]{}	%% フッタ中央
-\end{comment}
+\fancyfoot[C]{
+	- {\large \thepage} -
+}	%% フッタ中央
+
+\renewcommand{\headrulewidth}{1.5pt}	%% ヘッダの線の太さ
+%\end{comment}
 
 
 
