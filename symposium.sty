@@ -15,7 +15,7 @@
 \usepackage{comment}	%% コメント
 \usepackage{listings,jvlisting}	%% コードを貼る用
 \usepackage{indentfirst}		%% 強制的にインデント
-%\usepackage{newtxtext,newtxmath}	%% Times New Roman % これはうまくいかなかった
+\usepackage{newtxtext,newtxmath}	%% Times New Roman % これはうまくいかなかった
 
 
 %% レイアウト
@@ -24,10 +24,10 @@
 
 \setlength{\headheight}{9.5truept}
 \setlength{\topmargin}{0truemm}
-\setlength{\voffset}{19.3truemm-1truein+10truept}
+\setlength{\voffset}{19.3truemm-1truein+15.5truept}
 \setlength{\headsep}{25truemm-19.3truemm-9.5truept}
 
-\setlength{\footskip}{13truemm}
+\setlength{\footskip}{12truemm}
 
 \setlength{\columnsep}{10truemm}		% 段組の間隔
 
@@ -117,12 +117,13 @@
 
 %% ヘッダ中央部
 \fancyhead[C]{
+	\fontsize{9.5truept}{0pt}\selectfont
 	\textit{The 22nd Annual Symposium of Alife Lab, 2021}
 }
 \fancyhead[L]{}	%% ヘッダ左
 \fancyhead[R]{}	%% ヘッダ右
 \fancyfoot[C]{
-	- {\large \thepage} -
+	-~\thepage~-
 }	%% フッタ中央
 
 \renewcommand{\headrulewidth}{1.5pt}	%% ヘッダの線の太さ
